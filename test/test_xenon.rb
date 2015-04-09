@@ -9,64 +9,55 @@ require 'memory'
 require_relative '../answer'
 
 class TestXenon < Minitest::Test
-
     def setup
-
         require_relative '../module.xenon'
+    end
 
-    end
-    
-    def test_xenon_account
-        mem = XenonMemoryTest.new()
-        
-        answer = Answer.new("xenon", "account", "strstr", "xenon account", "theartificiallounge", mem)
-        emote = answer.account()
-        assert mem.mem[4][0] == "ludivine" && mem.mem[4][1] == "wallet strstr" && mem.mem[4][2] == "10"         
+    # def test_xenon_account
+    #     mem = XenonMemoryTest.new
 
-        answer = Answer.new("xenon", "give", "maxdeviant", "xenon give greylion 2", "theartificiallounge", mem)
-        emote = answer.give()
-        
-        assert mem.mem[2][0] == "ludivine" && mem.mem[2][1] == "wallet maxdeviant" && mem.mem[2][2] == "3"
-        assert mem.mem[1][0] == "ludivine" && mem.mem[1][1] == "wallet greylion" && mem.mem[1][2] == "10"
-        
-    end
-    
-    def test_xenon_give
-      
-    end
-    
+    #     answer = Answer.new('xenon', 'account', 'strstr', 'xenon account', 'theartificiallounge', mem)
+    #     emote = answer.account
+
+    #     assert_includes mem.mem, ['ludivine', 'wallet strstr', '10']
+    # end
+
+    # def test_xenon_give
+    #     mem = XenonMemoryTest.new
+
+    #     answer = Answer.new('xenon', 'give', 'maxdeviant', 'xenon give greylion 2', 'theartificiallounge', mem)
+    #     emote = answer.give
+
+    #     assert_includes mem.mem, ['ludivine', 'wallet maxdeviant', '3']
+    #     assert_includes mem.mem, ['ludivine', 'wallet greylion', '10']
+    # end
 end
 
 class XenonMemoryTest < Memory
-    
     attr_reader :mem
-    
+
     def initialize
-        @mem = [[ "ludivine", "wallet aliceffekt", "10" ],
-                [ "ludivine", "wallet greylion", "8" ],
-                [ "ludivine", "wallet maxdeviant", "5" ],
-                [ "ludivine", "wallet jean", "999" ]]   
+        @mem = [['ludivine', 'wallet aliceffekt', '10'],
+                ['ludivine', 'wallet greylion', '8'],
+                ['ludivine', 'wallet maxdeviant', '5'],
+                ['ludivine', 'wallet jean', '999']]
     end
 
-    def load(query)
-
-        return @mem
-
+    def load(_query)
+        @mem
     end
 
     def save(stuffA, stuffB, stuffC)
-      if stuffB == "wallet aliceffekt" then
+      if stuffB == 'wallet aliceffekt'
         @mem[0][2] = stuffC
-      elsif stuffB == "wallet greylion" then
+      elsif stuffB == 'wallet greylion'
         @mem[1][2] = stuffC
-      elsif stuffB == "wallet maxdeviant" then
+      elsif stuffB == 'wallet maxdeviant'
         @mem[2][2] = stuffC
-      elsif stuffB == "wallet jean" then
+      elsif stuffB == 'wallet jean'
         @mem[3][2] = stuffC
       else
-        @mem += [[stuffA, stuffB, stuffC]] 
+        @mem += [[stuffA, stuffB, stuffC]]
       end
     end
-
 end
-

@@ -14,6 +14,12 @@ class Answer
 
     end
 
+    def includeModule name
+        
+        require "modules/module.#{name}.rb"
+
+    end
+
     def unknownModule
         # return "Huh? #{@username}, what do you want me to do?"
     end
